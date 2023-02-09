@@ -22,14 +22,14 @@
 ///     }
 ///   }
 ///
-/// @see {function} functions.set-min
+/// @see {function} functions.get-value
 ///
 @mixin up($token) {
     @if $token and not map.has-key(variables.$extend, $token) {
         @error "Invalid token, `#{$token}` doesn't exist. Choose one of #{map.keys(variables.$extend)}.";
     }
 
-    $min: functions.set-min($token);
+    $min: functions.get-value($token);
 
     @if $min {
         @media (min-width: $min) {
@@ -55,14 +55,14 @@
 ///     }
 ///   }
 ///
-/// @see {function} functions.set-max
+/// @see {function} functions.get-value
 ///
 @mixin down($token) {
     @if $token and not map.has-key(variables.$extend, $token) {
         @error "Invalid token, `#{$token}` doesn't exist. Choose one of #{map.keys(variables.$extend)}.";
     }
 
-    $max: functions.set-max($token);
+    $max: functions.get-value($token);
 
     @if $max {
         @media (max-width: $max) {
@@ -88,8 +88,7 @@
 ///     }
 ///   }
 ///
-/// @see {function} functions.set-min
-/// @see {function} functions.set-max
+/// @see {function} functions.get-value
 /// @see {function} functions.get-next
 ///
 @mixin only($token) {
@@ -97,9 +96,9 @@
         @error "Invalid token, `#{$token}` doesn't exist. Choose one of #{map.keys(variables.$extend)}.";
     }
 
-    $min: functions.set-min($token);
+    $min: functions.get-value($token);
     $next: functions.get-next($token);
-    $max: functions.set-max($next);
+    $max: functions.get-value($next);
 
     @if $min != null and $max != null {
         @media (min-width: $min) and (max-width: $max) {
@@ -127,8 +126,7 @@
 ///     }
 ///   }
 ///
-/// @see {function} functions.set-min
-/// @see {function} functions.set-max
+/// @see {function} functions.get-value
 ///
 @mixin between($min, $max) {
     @if $min and not map.has-key(variables.$extend, $min) {
@@ -137,8 +135,8 @@
         @error "Invalid token, `#{$max}` doesn't exist. Choose one of #{map.keys(variables.$extend)}.";
     }
 
-    $min: functions.set-min($min);
-    $max: functions.set-max($max);
+    $min: functions.get-value($min);
+    $max: functions.get-value($max);
 
     @if $min != null and $max != null {
         @media (min-width: $min) and (max-width: $max) {

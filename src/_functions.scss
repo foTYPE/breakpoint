@@ -33,21 +33,3 @@
 @function get-screens($exclude...) {
     @return map.remove(variables.$extend, $exclude...);
 }
-
-///
-/// Set min.
-///
-@function set-min($token) {
-    $min: get-value($token);
-
-    @return if($min != 0, $min, null);
-}
-
-///
-/// Set max.
-///
-@function set-max($token) {
-    $max: get-value($token);
-
-    @return if($max and $max > 0, $max - 1, null);
-}
